@@ -4,7 +4,7 @@ categories = ["entertainment","sports","fun","domestic","abroad","column","it_sc
 dict ={}
 vocabulary = []
 for i in range(1,9):
-	f = open("trial/output_category"+str(i)+".txt","r")
+	f = open("trial/testwords_category"+str(i)+".txt","r")
 	words = f.readlines()
 	wordslist = []
 	for word in words:

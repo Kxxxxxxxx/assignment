@@ -14,7 +14,6 @@ def index(request):
 	return render_to_response('index.html',{'form1':f})
 
 def results(request):
-#フォームに入力されたグノシーの記事から本文部分を抜き取り単語に分解する。
 	response = urllib.request.urlopen(request.POST['address'])
 	html = response.read().decode("utf-8")
 	soup = BeautifulSoup(html, "html.parser")
@@ -27,9 +26,10 @@ def results(request):
 	testwords = []
 	for testword in testlist:
 		testwords += str(testword[0])
+	categories = get_traindata.categories
 	vocabulary = get_traindata.vocabulary
 	dict = get_traindata.dict
-	categories = get_traindata.categories
+	
 
 	return render_to_response('results.html',{'category':train_classify(categories, vocabulary, dict, testwords)})
 
