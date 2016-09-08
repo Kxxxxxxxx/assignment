@@ -19,7 +19,7 @@ class Command(BaseCommand):
         soup = BeautifulSoup(html, "html.parser")
         for i in range(1,9):
         # for i in range(1,2):
-        	f = open('trial/article_category'+str(i)+'.txt', 'w')
+        	f = open('trial/testwords/article_category'+str(i)+'.txt', 'w')
         	categories_link = soup.find(class_='nav_color_'+str(i)).find('a')
         	categories_url = str(categories_link.get('href'))	
         	print(categories_url)
@@ -49,8 +49,8 @@ class Command(BaseCommand):
         #以下で教師データを生成
         # for i in range(1,2):
         for i in range(1,9):
-        	f = open("trial/testwords_category"+str(i)+".txt","w")
-        	trainwords = getmostfrequentwords('trial/article_category'+str(i)+'.txt')
+        	f = open("trial/testwords/testwords_category"+str(i)+".txt","w")
+        	trainwords = getmostfrequentwords('trial/testwords/article_category'+str(i)+'.txt')
         	for trainword in trainwords:
         		f.write(str(trainword[0]) + "\n")
         	f.close()
