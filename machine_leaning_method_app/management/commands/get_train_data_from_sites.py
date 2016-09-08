@@ -2,17 +2,16 @@
 
 from django.core.management.base import BaseCommand
 from getmostfrequentwords import *
-
+import urllib.request
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+import MeCab
+import collections
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        import urllib.request
-        from bs4 import BeautifulSoup
-        from urllib.parse import urljoin
-        import MeCab
-        import collections
-
+        
         # 以下でグノシーから教師データに用いる記事を取得
         url = "https://gunosy.com/"
         response = urllib.request.urlopen(url)
