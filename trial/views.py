@@ -3,8 +3,8 @@ from django.template import loader
 import urllib.request
 from bs4 import BeautifulSoup
 from trial.forms import HpForm
-from trial import get_traindata
-from trial.get_testdata import *
+from trial import get_train_data
+from trial.get_test_data import *
 from trial.train_classify import *
 
 # Create your views here.
@@ -22,13 +22,13 @@ def results(request):
 	article_content = ''
 	for article in article_contents:
 		article_content += article.get_text()
-	testlist = list(get_testdata(article_content))
+	testlist = list(get_test_data(article_content))
 	testwords = []
 	for testword in testlist:
 		testwords += str(testword[0])
-	categories = get_traindata.categories
-	vocabulary = get_traindata.vocabulary
-	dict = get_traindata.dict
+	categories = get_train_data.categories
+	vocabulary = get_train_data.vocabulary
+	dict = get_train_data.dict
 	
 
 	return render_to_response('results.html',{'category':train_classify(categories, vocabulary, dict, testwords)})

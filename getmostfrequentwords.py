@@ -32,7 +32,7 @@ def getmostfrequentwords(file):
     #     print(vocas[0])
         # for voca in vocas:
         #     print (voca)
-    return words.most_common(200)
+    return words.most_common(300)
 
 # #
 # for i in range(1,9):
