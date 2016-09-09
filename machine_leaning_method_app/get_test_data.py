@@ -1,13 +1,11 @@
 import MeCab
 import collections
-from ... import ngwords
+from trial import ngwords
 
 mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
 
-def getmostfrequentwords(file):
-    f = open(file)
-    text = f.read()
+def get_test_data(text):
     mecab.parse('')  # 文字列がGCされるのを防ぐ
     node = mecab.parseToNode(text)
     words = collections.Counter()
@@ -25,11 +23,4 @@ def getmostfrequentwords(file):
             words[features[6]] += 1
     # 次の単語に進める
         node = node.next
-    # 名詞:surface="スケート", feature="名詞,一般,*,*,*,*,スケート,スケート,スケート"
-    # 動詞:surface="滑れ", feature="動詞,自立,*,*,一段,未然形,滑れる,スベレ,スベレ"
-    # print(words.most_common(100))
-    # for vocas in words.most_common(100):
-    #     print(vocas[0])
-        # for voca in vocas:
-        #     print (voca)
-    return words.most_common(300)
+    return words.most_common()
