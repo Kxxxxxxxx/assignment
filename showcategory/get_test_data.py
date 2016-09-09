@@ -1,6 +1,6 @@
 import MeCab
 import collections
-from machine_leaning_method_app import ngwords
+from showcategory import ngwords
 
 mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 

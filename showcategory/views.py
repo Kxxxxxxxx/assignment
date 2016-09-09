@@ -2,10 +2,10 @@ from django.shortcuts import render_to_response
 from django.template import loader
 import urllib.request
 from bs4 import BeautifulSoup
-from machine_leaning_method_app.forms import HpForm
-from machine_leaning_method_app import get_train_data
-from machine_leaning_method_app.get_test_data import *
-from machine_leaning_method_app.train_classify import *
+from showcategory.forms import HpForm
+from showcategory import get_train_data
+from showcategory.get_test_data import *
+from showcategory.train_classify import *
 
 # Create your views here.
 

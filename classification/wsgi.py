@@ -1,5 +1,5 @@
 """
-WSGI config for machine_leaning_method project.
+WSGI config for classification project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,7 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                      "machine_leaning_method.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "classification.settings")
 
 application = get_wsgi_application()

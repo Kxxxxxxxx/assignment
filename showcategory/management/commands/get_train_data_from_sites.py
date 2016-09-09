@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.core.management.base import BaseCommand
-from machine_leaning_method_app.management.commands.getmostfrequentwords import *
+from showcategory.management.commands.getmostfrequentwords import *
 import urllib.request
 from bs4 import BeautifulSoup
 
@@ -18,7 +18,7 @@ class Command(BaseCommand):
         for i in range(1, 9):
             # for i in range(1,2):
             f = open(
-                'machine_leaning_method_app/testwords/article_category' + str(i) + '.txt', 'w')
+                'showcategory/testwords/article_category' + str(i) + '.txt', 'w')
             categories_link = soup.find(class_='nav_color_' + str(i)).find('a')
             categories_url = str(categories_link.get('href'))
             print(categories_url)
@@ -49,10 +49,10 @@ class Command(BaseCommand):
         # 以下で教師データを生成
         # for i in range(1,2):
         for i in range(1, 9):
-            f = open("machine_leaning_method_app/testwords/testwords_category" +
+            f = open("showcategory/testwords/testwords_category" +
                      str(i) + ".txt", "w")
             trainwords = getmostfrequentwords(
-                'machine_leaning_method_app/testwords/article_category' + str(i) + '.txt')
+                'showcategory/testwords/article_category' + str(i) + '.txt')
             for trainword in trainwords:
                 f.write(str(trainword[0]) + "\n")
             f.close()
