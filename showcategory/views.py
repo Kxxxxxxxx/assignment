@@ -2,10 +2,10 @@ from django.shortcuts import render_to_response
 from django.template import loader
 import urllib.request
 from bs4 import BeautifulSoup
-from trial.forms import HpForm
-from trial import get_train_data
-from trial.get_test_data import *
-from trial.train_classify import *
+from showcategory.forms import HpForm
+from showcategory import get_train_data
+from showcategory.get_test_data import *
+from showcategory.train_classify import *
 
 # Create your views here.
 
