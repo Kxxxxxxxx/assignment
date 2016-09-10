@@ -73,7 +73,7 @@ class Command(BaseCommand):
             for d in documents[c]:
                 count = 0
                 for word in vocabulary:
-                    if word == d:
+                    if word in d:
                         count += 1
                         n_word[c][word] = count
 
