@@ -13,12 +13,10 @@ def classify(data):
     # 各クラス毎にlogP(D)を求める
     pp = {}
     for c in p_word:
-        print(c)
         pp[c] = math.log(1 / 8)
         for word in vocabulary:
             if word in p_word[c]:
                 pp[c] += math.log(p_word[c][word])
-    print(pp)
 
     # 求めたlogP(D)の内、どれが最も大きいか判定
     for c in p_word:
