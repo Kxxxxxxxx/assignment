@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand
 from show_category import get_words_from_text
-from show_category import words_training
 import urllib.request
 from bs4 import BeautifulSoup
 import pickle
@@ -17,7 +16,7 @@ class Command(BaseCommand):
         html = response.read().decode("utf-8")
         soup = BeautifulSoup(html, "html.parser")
         for i in range(1, 9):
-            with open('show_category/words_training/article_categoryy' + str(i) + '.txt', 'w') as f:
+            with open('show_category/words_training/article_category' + str(i) + '.txt', 'w') as f:
                 categories_link = soup.find(class_='nav_color_' + str(i)).find('a')
                 categories_url = str(categories_link.get('href'))
                 print(categories_url)
@@ -49,7 +48,7 @@ class Command(BaseCommand):
         vocabulary = []
         for i in range(1, 9):
             trainwords = get_words_from_text.get_words_from_text("file",
-                                                                 'show_category/words_training/article_category' + str(i) + '.txt')
+             'show_category/words_training/article_category' + str(i) + '.txt')
             wordslist = []
             for trainword in trainwords:
                 wordslist.append(str(trainword[0]))
@@ -87,5 +86,5 @@ class Command(BaseCommand):
 
         with open('show_category/words_training_classification/vocabulary.dump', 'wb') as f:
             pickle.dump(vocabulary, f)
-        with open('show_category/words_training_classification/word_possiblility.dump', 'wb') as f:
+        with open('show_category/words_training_classification/word_possibility.dump', 'wb') as f:
             pickle.dump(p_word, f)
