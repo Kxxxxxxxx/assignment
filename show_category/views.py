@@ -2,12 +2,9 @@ from django.shortcuts import render_to_response
 from django.template import loader
 import urllib.request
 from bs4 import BeautifulSoup
-from showcategory.forms import HpForm
-from showcategory import get_train_data
-from showcategory.get_test_data import *
-from showcategory.train_classify import *
-
-# Create your views here.
+from show_category.forms import HpForm
+from show_category import get_words_from_text
+from show_category import classify
 
 
 def index(request):
@@ -24,12 +21,10 @@ def results(request):
     article_content = ''
     for article in article_contents:
         article_content += article.get_text()
-    testlist = list(get_test_data(article_content))
+    testlist = list(get_words_from_text.get_words_from_text(
+        "text", article_content))
     testwords = []
     for testword in testlist:
         testwords += str(testword[0])
-    categories = get_train_data.categories
-    vocabulary = get_train_data.vocabulary
-    dict = get_train_data.dict
 
-    return render_to_response('results.html', {'category': train_classify(categories, vocabulary, dict, testwords)})
+    return render_to_response('results.html', {'category': classify.classify(testwords)})
