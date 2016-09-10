@@ -7,8 +7,8 @@ mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
 def get_words_from_text(readin_variety, reading_content):
     if readin_variety == "file":
-        f = open(reading_content)
-        text = f.read()
+        with open(reading_content) as f:
+            text = f.read()
     elif readin_variety == "text":
         text = reading_content
 

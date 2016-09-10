@@ -12,37 +12,35 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         # 以下でグノシーから教師データに用いる記事を取得
-        # url = "https://gunosy.com/"
-        # response = urllib.request.urlopen(url)
-        # html = response.read().decode("utf-8")
-        # soup = BeautifulSoup(html, "html.parser")
-        # for i in range(1, 9):
-        #     f = open(
-        #         'show_category/words_training/article_categoryy' + str(i) + '.txt', 'w')
-        #     categories_link = soup.find(class_='nav_color_' + str(i)).find('a')
-        #     categories_url = str(categories_link.get('href'))
-        #     print(categories_url)
-        #     response = urllib.request.urlopen(categories_url)
-        #     html = response.read().decode("utf-8")
-        #     soup = BeautifulSoup(html, "html.parser")
-        #     for j in range(2, 52):
-        #         article_links = soup.find(
-        #             class_='main').find_all(class_='list_title')
-        #         for article_link in article_links:
-        #             article_url = str(article_link.find('a').attrs['href'])
-        #             response = urllib.request.urlopen(article_url)
-        #             html = response.read().decode("utf-8")
-        #             soup = BeautifulSoup(html, "html.parser")
-        #             article_contents = soup.find(
-        #                 class_='article gtm-click').find_all('p')
-        #             print(article_url)
-        #             for article in article_contents:
-        #                 f.write(article.get_text())
-        #         response = urllib.request.urlopen(
-        #             categories_url + '?page=' + str(j))
-        #         html = response.read().decode("utf-8")
-        #         soup = BeautifulSoup(html, "html.parser")
-        #     f.close()
+        url = "https://gunosy.com/"
+        response = urllib.request.urlopen(url)
+        html = response.read().decode("utf-8")
+        soup = BeautifulSoup(html, "html.parser")
+        for i in range(1, 9):
+            with open('show_category/words_training/article_categoryy' + str(i) + '.txt', 'w') as f:
+                categories_link = soup.find(class_='nav_color_' + str(i)).find('a')
+                categories_url = str(categories_link.get('href'))
+                print(categories_url)
+                response = urllib.request.urlopen(categories_url)
+                html = response.read().decode("utf-8")
+                soup = BeautifulSoup(html, "html.parser")
+                for j in range(2, 52):
+                    article_links = soup.find(
+                        class_='main').find_all(class_='list_title')
+                    for article_link in article_links:
+                        article_url = str(article_link.find('a').attrs['href'])
+                        response = urllib.request.urlopen(article_url)
+                        html = response.read().decode("utf-8")
+                        soup = BeautifulSoup(html, "html.parser")
+                        article_contents = soup.find(
+                            class_='article gtm-click').find_all('p')
+                        print(article_url)
+                        for article in article_contents:
+                            f.write(article.get_text())
+                    response = urllib.request.urlopen(
+                        categories_url + '?page=' + str(j))
+                    html = response.read().decode("utf-8")
+                    soup = BeautifulSoup(html, "html.parser")
 
         # 以下で分類器生成
         categories = ["entertainment", "sports", "fun", "domestic",
