@@ -19,7 +19,7 @@ class Command(BaseCommand):
         index = 0
         for c in categories:
             index += 1
-            with open('show_category/words_training/article_categoryy_' + c + '.txt', 'w') as f:
+            with open('show_category/words_training/article_category_' + c + '.txt', 'w') as f:
                 categories_link = soup.find(
                     class_='nav_color_' + str(index)).find('a')
                 categories_url = str(categories_link.get('href'))
@@ -48,22 +48,29 @@ class Command(BaseCommand):
         vocabulary = []
         n_cat = {}  # それぞれのカテゴリーの総単語数
         n_word = {}  # カテゴリー内における単語の生起回数
+        words_in_category = {}  # それぞれのカテゴリーに属する単語を格納
         for c in categories:
             words_training = get_words_from_text.get_words_from_text("file",
                 'show_category/words_training/article_category_' + c + '.txt')
             n_word[c] = {}
+            words_list = []
             for word_training in words_training:
+                words_list.append(word_training[0])
                 vocabulary.append(word_training[0])
                 n_word[c][word_training[0]] = word_training[1]
             n_cat[c] = sum(n_word[c].values())
+            words_in_category[c] = words_list
+        for c in categories:
+            for word in vocabulary:
+                if word not in words_in_category[c]:
+                    n_word[c][word] = 0
 
         # 各カテゴリー毎の単語の生起確率
         p_word = {}
         for c in categories:
             p_word[c] = {}
             for word in vocabulary:
-                if word in n_word[c]:
-                    p_word[c][word] = (n_word[c][word] + 1) / (n_cat[c])
+                p_word[c][word] = (n_word[c][word] + 1) / (n_cat[c])
 
         with open('show_category/words_training_classification/vocabulary.dump', 'wb') as f:
             pickle.dump(vocabulary, f)
