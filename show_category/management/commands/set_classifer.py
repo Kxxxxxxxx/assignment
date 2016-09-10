@@ -17,7 +17,8 @@ class Command(BaseCommand):
         soup = BeautifulSoup(html, "html.parser")
         for i in range(1, 9):
             with open('show_category/words_training/article_category' + str(i) + '.txt', 'w') as f:
-                categories_link = soup.find(class_='nav_color_' + str(i)).find('a')
+                categories_link = soup.find(
+                    class_='nav_color_' + str(i)).find('a')
                 categories_url = str(categories_link.get('href'))
                 print(categories_url)
                 response = urllib.request.urlopen(categories_url)
@@ -48,7 +49,7 @@ class Command(BaseCommand):
         vocabulary = []
         for i in range(1, 9):
             trainwords = get_words_from_text.get_words_from_text("file",
-             'show_category/words_training/article_category' + str(i) + '.txt')
+                'show_category/words_training/article_category' + str(i) + '.txt')
             wordslist = []
             for trainword in trainwords:
                 wordslist.append(str(trainword[0]))
