@@ -13,21 +13,20 @@ def classify(data):
     # 各クラス毎にlogP(D)を求める
     pp = {}
     for c in p_word:
+        print(c)
         pp[c] = math.log(1 / 8)
         for word in vocabulary:
             if word in p_word[c]:
-                if word in data:
-                    pp[c] += math.log(p_word[c][word])
-                else:
-                    pp[c] += math.log((1 - p_word[c][word]))
+                pp[c] += math.log(p_word[c][word])
+    print(pp)
 
     # 求めたlogP(D)の内、どれが最も大きいか判定
     for c in p_word:
         maxpp = maxpp if 'maxpp' in locals() else pp[c]
-        maxcls = maxcls if 'maxcls' in locals() else c
+        max_cat = max_cat if 'max_cat' in locals() else c
 
         if maxpp < pp[c]:
             maxpp = pp[c]
-            maxcls = c
+            max_cat = c
 
-    return (maxcls)
+    return (max_cat)
