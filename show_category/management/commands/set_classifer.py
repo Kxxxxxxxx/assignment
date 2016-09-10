@@ -85,7 +85,7 @@ class Command(BaseCommand):
                 if word in n_word[c]:
                     p_word[c][word] = (n_word[c][word] + 1) / (n_cls[c])
 
-        with open('show_category/words_training_possibility/vocabulary.dump', 'wb') as f:
+        with open('show_category/words_training_classification/vocabulary.dump', 'wb') as f:
             pickle.dump(vocabulary, f)
-        with open('show_category/words_training_possibility/word_possiblility.dump', 'wb') as f:
+        with open('show_category/words_training_classification/word_possiblility.dump', 'wb') as f:
             pickle.dump(p_word, f)

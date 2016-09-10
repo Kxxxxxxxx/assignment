@@ -6,9 +6,9 @@ import pickle
 
 def classify(data):
 
-    with open('show_category/words_training_possibility/word_possiblility.dump', 'rb') as f:
+    with open('show_category/words_training_classification/word_possiblility.dump', 'rb') as f:
         p_word = pickle.load(f)
-    with open('show_category/words_training_possibility/vocabulary.dump', 'rb') as f:
+    with open('show_category/words_training_classification/vocabulary.dump', 'rb') as f:
         vocabulary = pickle.load(f)
     # 各クラス毎にlogP(D)を求める
     pp = {}
