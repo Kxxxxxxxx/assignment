@@ -17,11 +17,10 @@ class Command(BaseCommand):
         html = response.read().decode("utf-8")
         soup = BeautifulSoup(html, "html.parser")
         index = 0
-        for c in categories:
-            index += 1
+        for (index, c) in enumerate(categories):
             with open('show_category/words_training/article_category_' + c + '.txt', 'w') as f:
                 categories_link = soup.find(
-                    class_='nav_color_' + str(index)).find('a')
+                    class_='nav_color_' + str(index+1)).find('a')
                 categories_url = str(categories_link.get('href'))
                 response = urllib.request.urlopen(categories_url)
                 html = response.read().decode("utf-8")

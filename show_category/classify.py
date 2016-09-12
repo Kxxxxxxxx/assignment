@@ -16,13 +16,6 @@ def classify(data):
             if word in data:
                 pp[c] += math.log(p_word[c][word])
 
-    # 求めたlogP(D)の内、どれが最も大きいか判定
-    for c in p_word:
-        max_pp = max_pp if 'max_pp' in locals() else pp[c]
-        max_cat = max_cat if 'max_cat' in locals() else c
-
-        if max_pp < pp[c]:
-            max_pp = pp[c]
-            max_cat = c
+    max_cat = max([(v,k) for k,v in pp.items()])[1]
 
     return (max_cat)
