@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand
-from show_category import get_words_from_text
+from show_category import views
 import urllib.request
 from bs4 import BeautifulSoup
 import pickle
@@ -49,7 +49,7 @@ class Command(BaseCommand):
         n_word = {}  # カテゴリー内における単語の生起回数
         words_in_category = {}  # それぞれのカテゴリーに属する単語を格納
         for c in categories:
-            words_training = get_words_from_text.get_words_from_text("file",
+            words_training = views.get_words_from_text("file",
                 'show_category/words_training/article_category_' + c + '.txt')
             n_word[c] = {}
             words_list = []
