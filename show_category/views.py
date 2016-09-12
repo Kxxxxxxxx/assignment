@@ -50,6 +50,8 @@ def classify(data):
     return (max_cat)
 
 def get_words_from_text(readin_variety, reading_content):
+    mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
+
     if readin_variety == "file":
         with open(reading_content) as f:
             text = f.read()

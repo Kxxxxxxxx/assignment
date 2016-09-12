@@ -2,52 +2,19 @@
 from django.core.management.base import BaseCommand
 from show_category import views
 import urllib.request
-from bs4 import BeautifulSoup
 import pickle
-
+from show_category import categories_classification
+import MeCab
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        categories = ["entertainment", "sports", "fun", "domestic",
-                      "abroad", "column", "it_science", "gourmet"]
-        # 以下でグノシーから教師データに用いる記事を取得
-        url = "https://gunosy.com/"
-        response = urllib.request.urlopen(url)
-        html = response.read().decode("utf-8")
-        soup = BeautifulSoup(html, "html.parser")
-        index = 0
-        for (index, c) in enumerate(categories):
-            with open('show_category/words_training/article_category_' + c + '.txt', 'w') as f:
-                categories_link = soup.find(
-                    class_='nav_color_' + str(index+1)).find('a')
-                categories_url = str(categories_link.get('href'))
-                response = urllib.request.urlopen(categories_url)
-                html = response.read().decode("utf-8")
-                soup = BeautifulSoup(html, "html.parser")
-                for j in range(2, 52):
-                    article_links = soup.find(
-                        class_='main').find_all(class_='list_title')
-                    for article_link in article_links:
-                        article_url = str(article_link.find('a').attrs['href'])
-                        response = urllib.request.urlopen(article_url)
-                        html = response.read().decode("utf-8")
-                        soup = BeautifulSoup(html, "html.parser")
-                        article_contents = soup.find(
-                            class_='article gtm-click').find_all('p')
-                        for article in article_contents:
-                            f.write(article.get_text())
-                    response = urllib.request.urlopen(
-                        categories_url + '?page=' + str(j))
-                    html = response.read().decode("utf-8")
-                    soup = BeautifulSoup(html, "html.parser")
-
         # 以下で分類器生成
-
         vocabulary = []
         n_cat = {}  # それぞれのカテゴリーの総単語数
         n_word = {}  # カテゴリー内における単語の生起回数
         words_in_category = {}  # それぞれのカテゴリーに属する単語を格納
+        categories = categories_classification.categories_classification
         for c in categories:
             words_training = views.get_words_from_text("file",
                 'show_category/words_training/article_category_' + c + '.txt')
