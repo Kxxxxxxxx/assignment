@@ -16,7 +16,6 @@ class Command(BaseCommand):
         response = urllib.request.urlopen(url)
         html = response.read().decode("utf-8")
         soup = BeautifulSoup(html, "html.parser")
-        index = 0
         for (index, c) in enumerate(categories):
             with open('show_category/words_training/article_category_' + c + '.txt', 'w') as f:
                 categories_link = soup.find(
